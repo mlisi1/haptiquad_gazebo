@@ -1,0 +1,69 @@
+controller_manager:
+  ros__parameters:
+    use_sim_time: True
+    update_rate: 500  # Hz
+
+    joint_state_broadcaster:
+      use_sim_time: True
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # joint_group_effort_controller:
+    #   use_sim_time: True
+    #   type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_group_position_controller:
+      use_sim_time: True
+      type: joint_trajectory_controller/JointTrajectoryController
+      # type: effort_controllers/JointGroupEffortController
+
+
+
+joint_group_position_controller:
+  ros__parameters:
+    use_sim_time: True
+    joints:
+        - LF_HAA
+        - LF_HFE
+        - LF_KFE
+        - LH_HAA
+        - LH_HFE
+        - LH_KFE
+        - RF_HAA
+        - RF_HFE
+        - RF_KFE
+        - RH_HAA
+        - RH_HFE
+        - RH_KFE
+    command_interfaces:
+      - effort
+    state_interfaces:
+      - position
+      - velocity
+
+    # allow_integration_in_goal_trajectories: True
+    
+    gains:
+      LF_HAA  : {p: 100.0, i: 0.01, d: 7.0}
+      LF_HFE  : {p: 100.0, i: 0.01, d: 7.0}
+      LF_KFE  : {p: 100.0, i: 0.01, d: 7.0}
+      LH_HAA  : {p: 100.0, i: 0.01, d: 7.0}
+      LH_HFE  : {p: 100.0, i: 0.01, d: 7.0}
+      LH_KFE  : {p: 100.0, i: 0.01, d: 7.0}
+      RF_HAA  : {p: 100.0, i: 0.01, d: 7.0}
+      RF_HFE  : {p: 100.0, i: 0.01, d: 7.0}
+      RF_KFE  : {p: 100.0, i: 0.01, d: 7.0}
+      RH_HAA  : {p: 100.0, i: 0.01, d: 7.0}
+      RH_HFE  : {p: 100.0, i: 0.01, d: 7.0}
+      RH_KFE  : {p: 100.0, i: 0.01, d: 7.0}
+    
+
+    # action_monitor_rate: 100.0 # Defaults to 20
+    # state_publish_rate: 100.0 # Defaults to 50
+    # update_rate: 100
+
+
+
+#       #100, 0.01, 7 works
+
+
+
