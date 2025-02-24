@@ -1,0 +1,11 @@
+[submodule "momobs_ros2"]
+	path = momobs_ros2
+	url = git@github.com:mlisi1/momobs_ros2.git
+[submodule "champ"]
+	path = champ
+	url = git@github.com:chvmp/champ.git
+	branch = ros2
+[submodule "anymal_c_simple_description"]
+	path = anymal_c_simple_description
+	url = git@github.com:mlisi1/anymal_c_simple_description.git
+	branch = humble-floating-base
