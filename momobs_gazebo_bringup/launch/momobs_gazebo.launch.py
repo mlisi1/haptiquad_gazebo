@@ -43,33 +43,7 @@ def generate_launch_description():
     links_config = os.path.join(config_pkg_share, "config/links/links.yaml")
 
 
-    force_plotter = Node(
-        package='momobs_plot',
-        executable='force_plotter.py',
-        condition=IfCondition(LaunchConfiguration('force')),
-        emulate_tty=True,
-        parameters=[{
-            'autoscale':True,
-            'listening':True,
-            'legs_prefix': ['LF', 'LH', 'RF', 'RH'],
-            'foot_suffix': 'FOOT',
-            'memory_limit': 1000,
-            'x_lim': 10.0,
-        }]
-    )
-
-    residual_plotter = Node(
-        package='momobs_plot',
-        executable='residual_plotter.py',
-        condition=IfCondition(LaunchConfiguration('residuals')),
-        parameters=[{
-            'autoscale':True,
-            'listening':True,
-            'x_lim':10.0,
-            'memory_limit': 1000,
-            'legs_prefix': ['LF', 'LH', 'RF', 'RH'],
-        }]
-    )
+    
 
     quadruped_controller_node = Node(
         package="champ_base",
@@ -160,6 +134,35 @@ def generate_launch_description():
     )
 
 
+    force_plotter = Node(
+        package='momobs_plot',
+        executable='force_plotter.py',
+        condition=IfCondition(LaunchConfiguration('force')),
+        emulate_tty=True,
+        parameters=[{
+            'autoscale':True,
+            'listening':True,
+            'legs_prefix': ['LF', 'LH', 'RF', 'RH'],
+            'foot_suffix': 'FOOT',
+            'memory_limit': 1000,
+            'x_lim': 10.0,
+        }]
+    )
+
+    residual_plotter = Node(
+        package='momobs_plot',
+        executable='residual_plotter.py',
+        condition=IfCondition(LaunchConfiguration('residuals')),
+        parameters=[{
+            'autoscale':True,
+            'listening':True,
+            'x_lim':10.0,
+            'memory_limit': 1000,
+            'legs_prefix': ['LF', 'LH', 'RF', 'RH'],
+        }]
+    )
+
+
 
 
     return LaunchDescription(
@@ -168,8 +171,6 @@ def generate_launch_description():
             residual_arg,
             description,
             momobs,
-            force_plotter,
-            residual_plotter,
             quadruped_controller_node,
             gazebo_description,
             start_gazebo_server_cmd,
@@ -177,6 +178,8 @@ def generate_launch_description():
             timer,
             start_gazebo_spawner_cmd,
             load_joint_trajectory_position_controller,
-            load_joint_state_broadcaster
+            load_joint_state_broadcaster,
+            force_plotter,
+            residual_plotter,
         ]
     )
