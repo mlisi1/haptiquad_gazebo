@@ -21,19 +21,19 @@ def generate_launch_description():
 
 
     description_pkg = get_package_share_directory('anymal_c_simple_description')
-    momobs_ros_pkg = get_package_share_directory('momobs_ros2')
+    haptiquad_ros_pkg = get_package_share_directory('haptiquad_ros2')
     config_pkg_share = get_package_share_directory('anymal_c_config')
 
 
     description_launch_file = os.path.join(description_pkg, 'launch', 'floating_base_description.launch.py')   
     gazebo_description_launch_file = os.path.join(description_pkg, 'launch', 'gazebo_description.launch.py')   
-    momobs_launch_file = os.path.join(momobs_ros_pkg, 'launch', 'gazebo_wrapper.launch.py')
+    haptiquad_launch_file = os.path.join(haptiquad_ros_pkg, 'launch', 'gazebo_wrapper.launch.py')
     gazebo_config = os.path.join(config_pkg_share, 'config', 'gazebo.yaml')
 
     default_model_path = os.path.join(description_pkg, "urdf/anymal_main.xacro")
     xacro_content = xacro.process_file(default_model_path)
 
-    momobs = IncludeLaunchDescription(PythonLaunchDescriptionSource(momobs_launch_file))
+    haptiquad = IncludeLaunchDescription(PythonLaunchDescriptionSource(haptiquad_launch_file))
     description = IncludeLaunchDescription(PythonLaunchDescriptionSource(description_launch_file))
     gazebo_description = IncludeLaunchDescription(PythonLaunchDescriptionSource(gazebo_description_launch_file))
 
@@ -135,7 +135,7 @@ def generate_launch_description():
 
 
     force_plotter = Node(
-        package='momobs_plot',
+        package='haptiquad_plot',
         executable='force_plotter.py',
         condition=IfCondition(LaunchConfiguration('force')),
         emulate_tty=True,
@@ -150,7 +150,7 @@ def generate_launch_description():
     )
 
     residual_plotter = Node(
-        package='momobs_plot',
+        package='haptiquad_plot',
         executable='residual_plotter.py',
         condition=IfCondition(LaunchConfiguration('residuals')),
         parameters=[{
@@ -170,7 +170,7 @@ def generate_launch_description():
             force_arg,
             residual_arg,
             description,
-            momobs,
+            haptiquad,
             quadruped_controller_node,
             gazebo_description,
             start_gazebo_server_cmd,

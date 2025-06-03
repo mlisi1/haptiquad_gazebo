@@ -1,3 +1,3 @@
-colcon build --packages-skip momobs_ros2 
+colcon build --packages-skip haptiquad_ros2 
 source install/setup.bash
-colcon build --packages-select momobs_ros2 --cmake-force-configure
+colcon build --packages-select haptiquad_ros2 --cmake-force-configure
